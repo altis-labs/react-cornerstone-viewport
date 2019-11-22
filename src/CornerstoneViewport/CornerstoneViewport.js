@@ -73,6 +73,8 @@ class CornerstoneViewport extends Component {
     style: PropTypes.object,
     className: PropTypes.string,
     isOverlayVisible: PropTypes.bool,
+    //custom
+    imageIdIndexChange: PropTypes.func,
   };
 
   static defaultProps = {
@@ -89,6 +91,7 @@ class CornerstoneViewport extends Component {
     loadingIndicatorComponent: LoadingIndicator,
     resizeThrottleMs: 200,
     tools: [],
+    imageIdIndexChange: null,
   };
 
   constructor(props) {
@@ -596,6 +599,10 @@ class CornerstoneViewport extends Component {
     this.setState({
       imageIdIndex: newImageIdIndex,
     });
+
+    if (this.props.imageIdIndexChange) {
+      this.props.imageIdIndexChange(newImageIdIndex);
+    }
   };
 
   onImageLoaded = () => {

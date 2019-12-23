@@ -63,6 +63,7 @@ class CornerstoneViewport extends Component {
     ),
     startLoadHandler: PropTypes.func,
     endLoadHandler: PropTypes.func,
+    initialLoad: PropTypes.func,
     loadIndicatorDelay: PropTypes.number,
     loadingIndicatorComponent: PropTypes.oneOfType([
       PropTypes.element,
@@ -126,6 +127,8 @@ class CornerstoneViewport extends Component {
     this.startLoadHandler = this.props.startLoadHandler;
     this.endLoadHandler = this.props.endLoadHandler;
     this.loadHandlerTimeout = undefined; // "Loading..." timer
+
+    this.initialLoad = this.props.initialLoad;
   }
 
   // ~~ LIFECYCLE
@@ -182,6 +185,10 @@ class CornerstoneViewport extends Component {
       this.setState({ isLoading: false });
     } catch (error) {
       this.setState({ error, isLoading: false });
+    }
+
+    if (this.initialLoad) {
+      this.initialLoad();
     }
   }
 

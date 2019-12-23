@@ -188,7 +188,7 @@ class CornerstoneViewport extends Component {
     }
 
     if (this.initialLoad) {
-      this.initialLoad();
+      this.initialLoad(this.element);
     }
   }
 

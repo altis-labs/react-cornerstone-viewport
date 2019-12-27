@@ -716,17 +716,31 @@ function _trySetActiveTool(element, activeToolName) {
 
   const tool = validTools.find(tool => tool.name === activeToolName);
   if (tool) {
-    if (tool.mode !== 'active') {
-      console.log(
-        `New tool ${activeToolName} is not active. Not setting as active!`
-      );
-      return;
+    switch (tool.mode) {
+      case 'active':
+        cornerstoneTools.setToolActiveForElement(element, activeToolName, {
+          mouseButtonMask: 1,
+        });
+        break;
+      case 'passive':
+        cornerstoneTools.setToolPassiveForElement(element, activeToolName, {
+          mouseButtonMask: 1,
+        });
+        break;
+      case 'enabled':
+        cornerstoneTools.setToolEnabledForElement(element, activeToolName, {
+          mouseButtonMask: 1,
+        });
+        break;
+      case 'disabled':
+        cornerstoneTools.setToolDisabledForElement(element, activeToolName, {
+          mouseButtonMask: 1,
+        });
+        break;
+      default:
+        console.warn(`Tool mode ${tool.mode} not supported!`);
     }
   }
-
-  cornerstoneTools.setToolActiveForElement(element, activeToolName, {
-    mouseButtonMask: 1,
-  });
 }
 
 // TODO: Move configuration elsewhere

@@ -716,6 +716,7 @@ function _trySetActiveTool(element, activeToolName) {
 
   const tool = validTools.find(tool => tool.name === activeToolName);
   if (tool) {
+    console.log(`Setting ${activeToolName} to ${tool.mode}`);
     switch (tool.mode) {
       case 'active':
         cornerstoneTools.setToolActiveForElement(element, activeToolName, {

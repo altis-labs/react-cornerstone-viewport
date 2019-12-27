@@ -714,6 +714,16 @@ function _trySetActiveTool(element, activeToolName) {
     );
   }
 
+  const tool = validTools.find(tool => tool.name === activeToolName);
+  if (tool) {
+    if (tool.mode !== 'active') {
+      console.log(
+        `New tool ${activeToolName} is not active. Not setting as active!`
+      );
+      return;
+    }
+  }
+
   cornerstoneTools.setToolActiveForElement(element, activeToolName, {
     mouseButtonMask: 1,
   });

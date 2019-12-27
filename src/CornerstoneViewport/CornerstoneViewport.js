@@ -741,6 +741,8 @@ function _trySetActiveTool(element, activeToolName) {
       default:
         console.warn(`Tool mode ${tool.mode} not supported!`);
     }
+  } else {
+    console.warn(`tool: ${activeToolName} not found!`);
   }
 }
 

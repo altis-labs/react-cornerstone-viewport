@@ -43,10 +43,17 @@ class ViewportOverlay extends PureComponent {
     imageId: PropTypes.string.isRequired,
     imageIndex: PropTypes.number.isRequired,
     stackSize: PropTypes.number.isRequired,
+    seriesDateLabel: PropTypes.string.isRequired,
   };
 
   render() {
-    const { imageId, scale, windowWidth, windowCenter } = this.props;
+    const {
+      imageId,
+      scale,
+      windowWidth,
+      windowCenter,
+      seriesDateLabel,
+    } = this.props;
 
     if (!imageId) {
       return null;
@@ -90,9 +97,7 @@ class ViewportOverlay extends PureComponent {
         </div>
         <div className="top-right overlay-element">
           <div>{studyDescription}</div>
-          <div>
-            {formatDA(studyDate)} {formatTM(studyTime)}
-          </div>
+          <div>{seriesDateLabel}</div>
         </div>
         <div className="bottom-right overlay-element">
           <div>Zoom: {zoomPercentage}%</div>

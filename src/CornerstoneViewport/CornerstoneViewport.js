@@ -76,7 +76,7 @@ class CornerstoneViewport extends Component {
     isOverlayVisible: PropTypes.bool,
     //custom
     imageIdIndexChange: PropTypes.func,
-    seriesDateLabel: PropTypes.string.isRequired,
+    seriesDateLabel: PropTypes.string,
   };
 
   static defaultProps = {

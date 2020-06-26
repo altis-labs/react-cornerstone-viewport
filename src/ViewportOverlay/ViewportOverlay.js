@@ -43,7 +43,7 @@ class ViewportOverlay extends PureComponent {
     imageId: PropTypes.string.isRequired,
     imageIndex: PropTypes.number.isRequired,
     stackSize: PropTypes.number.isRequired,
-    seriesDateLabel: PropTypes.string.isRequired,
+    seriesDateLabel: PropTypes.string,
   };
 
   render() {
@@ -89,6 +89,10 @@ class ViewportOverlay extends PureComponent {
 
     const { imageIndex, stackSize } = this.props;
 
+    let seriesLabel = seriesDateLabel
+      ? seriesDateLabel
+      : `${formatDA(studyDate)} ${formatTM(studyTime)}`;
+
     const normal = (
       <React.Fragment>
         <div className="top-left overlay-element">
@@ -97,7 +101,7 @@ class ViewportOverlay extends PureComponent {
         </div>
         <div className="top-right overlay-element">
           <div>{studyDescription}</div>
-          <div>{seriesDateLabel}</div>
+          <div>{seriesLabel}</div>
         </div>
         <div className="bottom-right overlay-element">
           <div>Zoom: {zoomPercentage}%</div>

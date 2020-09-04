@@ -2,7 +2,7 @@ import dicomParser from 'dicom-parser';
 import cornerstone from 'cornerstone-core';
 import cornerstoneWADOImageLoader from 'cornerstone-wado-image-loader';
 import cornerstoneMath from 'cornerstone-math';
-import cornerstoneTools from 'cornerstone-tools';
+import cornerstoneTools from '@altis/cornerstone-tools';
 import Hammer from 'hammerjs';
 
 export default function initCornerstone() {

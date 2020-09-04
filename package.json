@@ -1,5 +1,5 @@
 {
-  "name": "react-cornerstone-viewport",
+  "name": "@altis/react-cornerstone-viewport",
   "version": "1.0.0",
   "description": "Cornerstone medical image viewport component for React",
   "author": "Altis Labs",

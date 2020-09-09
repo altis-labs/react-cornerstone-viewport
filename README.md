@@ -29,7 +29,7 @@ class Example extends Component {
 
 ## Versioning
 
-Current version is on 1.0.0, which is based off of react-cornerstone-viewport
+Current version is on 1.0.1, which is based off of react-cornerstone-viewport
 v0.2.2
 
 ## License

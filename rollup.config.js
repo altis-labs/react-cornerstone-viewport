@@ -13,7 +13,7 @@ const globals = {
   'react-dom': 'ReactDOM',
   'cornerstone-core': 'cornerstone',
   'cornerstone-math': 'cornerstoneMath',
-  'cornerstone-tools': 'cornerstoneTools',
+  '@altis/cornerstone-tools': 'cornerstoneTools',
   'cornerstone-wado-image-loader': 'cornerstoneWADOImageLoader',
   'dicom-parser': 'dicomParser',
   hammerjs: 'Hammer',

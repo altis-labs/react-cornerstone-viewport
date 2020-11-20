@@ -48,6 +48,7 @@ class CornerstoneViewport extends Component {
     frameRate: PropTypes.number, // Between 1 and ?
     //
     setViewportActive: PropTypes.func, // Called when viewport should be set to active?
+    handleRightClick: PropTypes.func,
     viewportOverlayComponent: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.func,
@@ -464,6 +465,11 @@ class CornerstoneViewport extends Component {
       cornerstoneTools.EVENTS.STACK_SCROLL,
       this.setViewportActive
     );
+
+    this.element[addOrRemoveEventListener](
+      cornerstoneTools.EVENTS.MOUSE_DOWN,
+      this.handleClick
+    );
   }
 
   /**
@@ -642,6 +648,15 @@ class CornerstoneViewport extends Component {
   setViewportActive = () => {
     if (this.props.setViewportActive) {
       this.props.setViewportActive(); // TODO: should take viewport index/ident?
+    }
+  };
+
+  handleClick = event => {
+    let { detail } = event;
+    let { buttons } = detail;
+    let isRightMousePress = buttons === 2;
+    if (this.props.handleRightClick && isRightMousePress) {
+      this.props.handleRightClick(event);
     }
   };
 

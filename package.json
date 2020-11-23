@@ -1,6 +1,6 @@
 {
   "name": "@altis/react-cornerstone-viewport",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Cornerstone medical image viewport component for React",
   "author": "Altis Labs",
   "license": "MIT",
@@ -17,6 +17,8 @@
     "registry": "https://npm.altislabs.com"
   },
   "scripts": {
+    "build:altis": "npm run prepublishOnly && npm run copynota",
+    "copynota": "cp -a \"./dist/.\" \"../altis-labs/nota/packages/nota/node_modules/@altis/react-cornerstone-viewport/dist\"",
     "build": "rollup -c",
     "build:release": "rollup -c",
     "build:examples": "webpack --progress --colors --config ./.webpack/webpack.dev.js -d",

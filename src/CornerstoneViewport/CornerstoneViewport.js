@@ -686,10 +686,22 @@ class CornerstoneViewport extends Component {
         <div
           className="viewport-element"
           onContextMenu={e => e.preventDefault()}
-          onMouseDown={e => e.preventDefault()}
+          onMouseDown={e => {
+            e.preventDefault();
+            this.element.focus();
+          }}
+          onMouseOver={e => {
+            e.preventDefault();
+            this.element.focus();
+          }}
+          onMouseOut={e => {
+            e.preventDefault();
+            this.element.blur();
+          }}
           ref={input => {
             this.element = input;
           }}
+          tabIndex={-1}
         >
           {displayLoadingIndicator && this.getLoadingIndicator()}
           {/* This classname is important in that it tells `cornerstone` to not

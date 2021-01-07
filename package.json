@@ -4,7 +4,7 @@
   "description": "Cornerstone medical image viewport component for React",
   "author": "Altis Labs",
   "license": "MIT",
-  "repository": "altis-labs/react-cornerstone-viewport",
+  "repository": "git://github.com/altis-labs/react-cornerstone-viewport.git",
   "main": "dist/index.js",
   "browser": "dist/index.umd.js",
   "module": "dist/index.es.js",
@@ -14,7 +14,7 @@
     "npm": ">=5"
   },
   "publishConfig": {
-    "registry": "https://npm.altislabs.com"
+    "registry":"https://npm.pkg.github.com"
   },
   "scripts": {
     "build:altis": "npm run prepublishOnly && npm run copynota",

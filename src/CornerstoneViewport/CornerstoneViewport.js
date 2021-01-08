@@ -7,7 +7,7 @@ import LoadingIndicator from '../LoadingIndicator/LoadingIndicator.js';
 import ViewportOrientationMarkers from '../ViewportOrientationMarkers/ViewportOrientationMarkers.js';
 import windowResizeHandler from './windowResizeHandler.js';
 import cornerstone from 'cornerstone-core';
-import cornerstoneTools from '@altis/cornerstone-tools';
+import cornerstoneTools from '@altis-labs/cornerstone-tools';
 import ReactResizeDetector from 'react-resize-detector/lib/index.js';
 
 // Util

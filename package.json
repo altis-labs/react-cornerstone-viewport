@@ -1,10 +1,10 @@
 {
-  "name": "@altis/react-cornerstone-viewport",
-  "version": "1.0.3",
+  "name": "@altis-labs/react-cornerstone-viewport",
+  "version": "1.0.4",
   "description": "Cornerstone medical image viewport component for React",
   "author": "Altis Labs",
   "license": "MIT",
-  "repository": "altis-labs/react-cornerstone-viewport",
+  "repository": "git://github.com/altis-labs/react-cornerstone-viewport.git",
   "main": "dist/index.js",
   "browser": "dist/index.umd.js",
   "module": "dist/index.es.js",
@@ -14,11 +14,11 @@
     "npm": ">=5"
   },
   "publishConfig": {
-    "registry": "https://npm.altislabs.com"
+    "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
     "build:altis": "npm run prepublishOnly && npm run copynota",
-    "copynota": "cp -a \"./dist/.\" \"../altis-labs/nota/packages/nota/node_modules/@altis/react-cornerstone-viewport/dist\"",
+    "copynota": "cp -a \"./dist/.\" \"../altis-labs/nota/packages/nota/node_modules/@altis-labs/react-cornerstone-viewport/dist\"",
     "build": "rollup -c",
     "build:release": "rollup -c",
     "build:examples": "webpack --progress --colors --config ./.webpack/webpack.dev.js -d",
@@ -28,7 +28,7 @@
     "prepublishOnly": "npm run build && npm run build:release"
   },
   "peerDependencies": {
-    "@altis/cornerstone-tools": "1.x.x",
+    "@altis-labs/cornerstone-tools": "1.x.x",
     "cornerstone-core": "2.3.x",
     "cornerstone-math": "0.1.x",
     "cornerstone-wado-image-loader": "3.0.x",
@@ -44,7 +44,7 @@
     "react-resize-detector": "^4.2.1"
   },
   "devDependencies": {
-    "@altis/cornerstone-tools": "^1.0.0",
+    "@altis-labs/cornerstone-tools": "^1.0.0",
     "@babel/core": "^7.2.0",
     "@babel/plugin-proposal-class-properties": "^7.2.1",
     "@babel/plugin-transform-runtime": "^7.4.3",

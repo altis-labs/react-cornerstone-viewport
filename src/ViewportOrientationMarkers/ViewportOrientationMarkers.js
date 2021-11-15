@@ -1,7 +1,7 @@
 import { PureComponent } from 'react';
 import React from 'react';
 import PropTypes from 'prop-types';
-import cornerstoneTools from 'cornerstone-tools';
+import cornerstoneTools from '@altis-labs/cornerstone-tools';
 import './ViewportOrientationMarkers.css';
 
 /**

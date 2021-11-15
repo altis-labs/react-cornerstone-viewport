@@ -6,7 +6,7 @@ import ViewportOverlay from '../ViewportOverlay/ViewportOverlay.js';
 import LoadingIndicator from '../LoadingIndicator/LoadingIndicator.js';
 import ViewportOrientationMarkers from '../ViewportOrientationMarkers/ViewportOrientationMarkers.js';
 import cornerstone from 'cornerstone-core';
-import cornerstoneTools from 'cornerstone-tools';
+import cornerstoneTools from '@altis-labs/cornerstone-tools';
 import ReactResizeDetector from 'react-resize-detector';
 import debounce from 'lodash.debounce';
 
@@ -53,6 +53,7 @@ class CornerstoneViewport extends Component {
     //
     initialViewport: PropTypes.object,
     setViewportActive: PropTypes.func, // Called when viewport should be set to active?
+    handleRightClick: PropTypes.func,
     onNewImage: PropTypes.func,
     onNewImageDebounced: PropTypes.func,
     onNewImageDebounceTime: PropTypes.number,
@@ -71,6 +72,7 @@ class CornerstoneViewport extends Component {
     ),
     startLoadHandler: PropTypes.func,
     endLoadHandler: PropTypes.func,
+    initialLoad: PropTypes.func,
     loadIndicatorDelay: PropTypes.number,
     loadingIndicatorComponent: PropTypes.oneOfType([
       PropTypes.element,
@@ -87,6 +89,10 @@ class CornerstoneViewport extends Component {
     className: PropTypes.string,
     isOverlayVisible: PropTypes.bool,
     orientationMarkers: PropTypes.arrayOf(PropTypes.string),
+
+    //altis custom
+    imageIdIndexChange: PropTypes.func,
+    seriesDateLabel: PropTypes.string,
   };
 
   static defaultProps = {
@@ -109,6 +115,10 @@ class CornerstoneViewport extends Component {
     tools: [],
     onNewImageDebounceTime: 0,
     orientationMarkers: ['top', 'left'],
+
+    //altis custom
+    imageIdIndexChange: null,
+    seriesDateLabel: null,
   };
 
   constructor(props) {
@@ -146,6 +156,9 @@ class CornerstoneViewport extends Component {
     this.loadHandlerTimeout = undefined; // "Loading..." timer
 
     this.numImagesLoaded = 0;
+
+    //altis custom
+    this.initialLoad = this.props.initialLoad;
   }
 
   // ~~ LIFECYCLE
@@ -226,6 +239,10 @@ class CornerstoneViewport extends Component {
       this.setState({ isLoading: false });
     } catch (error) {
       this.setState({ error, isLoading: false });
+    }
+
+    if (this.initialLoad) {
+      this.initialLoad(this.element);
     }
   }
 
@@ -383,7 +400,11 @@ class CornerstoneViewport extends Component {
    * @memberof CornerstoneViewport
    */
   getOverlay() {
-    const { viewportOverlayComponent: Component, imageIds } = this.props;
+    const {
+      viewportOverlayComponent: Component,
+      imageIds,
+      seriesDateLabel,
+    } = this.props;
     const { imageIdIndex, scale, windowWidth, windowCenter, isOverlayVisible } =
       this.state;
     const imageId = imageIds[imageIdIndex];
@@ -398,6 +419,7 @@ class CornerstoneViewport extends Component {
           windowWidth={windowWidth}
           windowCenter={windowCenter}
           imageId={imageId}
+          seriesDateLabel={seriesDateLabel}
         />
       )
     );
@@ -518,6 +540,10 @@ class CornerstoneViewport extends Component {
     this.element[addOrRemoveEventListener](
       cornerstoneTools.EVENTS.STACK_SCROLL,
       this.setViewportActive
+    );
+    this.element[addOrRemoveEventListener](
+      cornerstoneTools.EVENTS.MOUSE_DOWN,
+      this.handleClick
     );
   }
 
@@ -721,6 +747,10 @@ class CornerstoneViewport extends Component {
     // Could prevent cornerstone dependencies in child components.
     this.setState({ imageIdIndex: currentImageIdIndex });
 
+    if (this.props.imageIdIndexChange) {
+      this.props.imageIdIndexChange(currentImageIdIndex);
+    }
+
     if (callback) {
       callback({ currentImageIdIndex, sopInstanceUid });
     }
@@ -748,6 +778,15 @@ class CornerstoneViewport extends Component {
     this.setViewportActive();
 
     scrollToIndex(this.element, value);
+  };
+
+  handleClick = (event) => {
+    let { detail } = event;
+    let { buttons } = detail;
+    let isRightMousePress = buttons === 2;
+    if (this.props.handleRightClick && isRightMousePress) {
+      this.props.handleRightClick(event);
+    }
   };
 
   setViewportActive = () => {
@@ -787,10 +826,22 @@ class CornerstoneViewport extends Component {
         <div
           className="viewport-element"
           onContextMenu={(e) => e.preventDefault()}
-          onMouseDown={(e) => e.preventDefault()}
+          onMouseDown={(e) => {
+            e.preventDefault();
+            this.element.focus();
+          }}
+          onMouseOver={(e) => {
+            e.preventDefault();
+            this.element.focus();
+          }}
+          onMouseOut={(e) => {
+            e.preventDefault();
+            this.element.blur();
+          }}
           ref={(input) => {
             this.element = input;
           }}
+          tabIndex={-1}
         >
           {displayLoadingIndicator && this.getLoadingIndicator()}
           {/* This classname is important in that it tells `cornerstone` to not

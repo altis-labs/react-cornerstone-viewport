@@ -18,7 +18,7 @@
   },
   "scripts": {
     "build:altis": "npm run prepublishOnly && npm run copynota",
-    "copynota": "cp -a \"./dist/.\" \"../altis-labs/nota/packages/nota/node_modules/@altis-labs/react-cornerstone-viewport/dist\"",
+    "copynota": "cp -a \"./dist/.\" \"../../web-dev/node_modules/@altis-labs/react-cornerstone-viewport/dist\"",
     "build": "rollup -c",
     "build:release": "rollup -c",
     "build:examples": "webpack --progress --config ./.webpack/webpack.dev.js",

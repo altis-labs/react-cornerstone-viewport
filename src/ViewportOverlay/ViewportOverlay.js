@@ -35,6 +35,7 @@ function getCompression(imageId) {
   return 'Lossless / Uncompressed';
 }
 
+
 class ViewportOverlay extends PureComponent {
   static propTypes = {
     scale: PropTypes.number.isRequired,
@@ -43,7 +44,13 @@ class ViewportOverlay extends PureComponent {
     imageId: PropTypes.string.isRequired,
     imageIndex: PropTypes.number.isRequired,
     stackSize: PropTypes.number.isRequired,
-    seriesDateLabel: PropTypes.string,
+    labelOverrides: PropTypes.shape({
+      seriesDate: PropTypes.string,
+      patientName: PropTypes.string,
+      patientId: PropTypes.string,
+      studyDescription: PropTypes.string,
+      seriesDescription: PropTypes.string,
+    })
   };
 
   render() {
@@ -52,7 +59,7 @@ class ViewportOverlay extends PureComponent {
       scale,
       windowWidth,
       windowCenter,
-      seriesDateLabel,
+      labelOverrides
     } = this.props;
 
     if (!imageId) {
@@ -89,19 +96,31 @@ class ViewportOverlay extends PureComponent {
 
     const { imageIndex, stackSize } = this.props;
 
-    let seriesLabel = seriesDateLabel
-      ? seriesDateLabel
-      : `${formatDA(studyDate)} ${formatTM(studyTime)}`;
+    const {
+      seriesDate: seriesDateOverride,
+      patientName: patientNameOverride,
+      patientId: patientIdOverride,
+      studyDescription: studyDescriptionOverride,
+      seriesDescription: seriesDescriptionOverride,
+    } = labelOverrides ?? {};
+
+    const patientNameLabel = patientNameOverride ?? formatPN(patientName);
+    const patientIdLabel = patientIdOverride ?? patientId;
+
+    const studyDescriptionLabel = studyDescriptionOverride ?? studyDescription;
+    const seriesDateLabel = seriesDateOverride ?? `${formatDA(studyDate)} ${formatTM(studyTime)}`;
+
+    const seriesDescriptionLabel = seriesDescriptionOverride ?? seriesDescription;
 
     const normal = (
       <React.Fragment>
         <div className="top-left overlay-element">
-          <div>{formatPN(patientName)}</div>
-          <div>{patientId}</div>
+          <div>{patientNameLabel}</div>
+          <div>{patientIdLabel}</div>
         </div>
         <div className="top-right overlay-element">
-          <div>{studyDescription}</div>
-          <div>{seriesLabel}</div>
+          <div>{studyDescriptionLabel}</div>
+          <div>{seriesDateLabel}</div>
         </div>
         <div className="bottom-right overlay-element">
           <div>Zoom: {zoomPercentage}%</div>
@@ -126,7 +145,7 @@ class ViewportOverlay extends PureComponent {
                 ? `Thick: ${formatNumberPrecision(sliceThickness, 2)} mm`
                 : ''}
             </div>
-            <div>{seriesDescription}</div>
+            <div>{seriesDescriptionLabel}</div>
           </div>
         </div>
       </React.Fragment>

@@ -100,7 +100,7 @@ class CornerstoneViewport extends Component {
     resizeThrottleMs: 200,
     tools: [],
     imageIdIndexChange: null,
-    seriesDateLabel: null,
+    labelOverrides: null,
   };
 
   constructor(props) {

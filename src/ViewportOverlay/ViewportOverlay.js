@@ -58,13 +58,7 @@ class ViewportOverlay extends PureComponent {
       scale,
       windowWidth,
       windowCenter,
-      labelOverrides: {
-        seriesDate: seriesDateOverride,
-        patientName: patientNameOverride,
-        patientId: patientIdOverride,
-        studyDescription: studyDescriptionOverride
-      }
-
+      labelOverrides
     } = this.props;
 
     if (!imageId) {
@@ -100,6 +94,13 @@ class ViewportOverlay extends PureComponent {
     const imageDimensions = `${columns} x ${rows}`;
 
     const { imageIndex, stackSize } = this.props;
+
+    const {
+      seriesDate: seriesDateOverride,
+          patientName: patientNameOverride,
+        patientId: patientIdOverride,
+        studyDescription: studyDescriptionOverride
+    } = labelOverrides ?? {};
 
     const patientNameLabel = patientNameOverride ?? formatPN(patientName);
     const patientIdLabel = patientIdOverride ?? patientId;

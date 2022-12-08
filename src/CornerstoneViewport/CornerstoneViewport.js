@@ -82,6 +82,7 @@ class CornerstoneViewport extends Component {
       patientName: PropTypes.string,
       patientId: PropTypes.string,
       studyDescription: PropTypes.string,
+      seriesDescription: PropTypes.string,
     })
   };
 

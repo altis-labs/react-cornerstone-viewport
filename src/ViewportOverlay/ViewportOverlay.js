@@ -49,6 +49,7 @@ class ViewportOverlay extends PureComponent {
       patientName: PropTypes.string,
       patientId: PropTypes.string,
       studyDescription: PropTypes.string,
+      seriesDescription: PropTypes.string,
     })
   };
 
@@ -97,9 +98,10 @@ class ViewportOverlay extends PureComponent {
 
     const {
       seriesDate: seriesDateOverride,
-          patientName: patientNameOverride,
-        patientId: patientIdOverride,
-        studyDescription: studyDescriptionOverride
+      patientName: patientNameOverride,
+      patientId: patientIdOverride,
+      studyDescription: studyDescriptionOverride,
+      seriesDescription: seriesDescriptionOverride,
     } = labelOverrides ?? {};
 
     const patientNameLabel = patientNameOverride ?? formatPN(patientName);
@@ -107,6 +109,8 @@ class ViewportOverlay extends PureComponent {
 
     const studyDescriptionLabel = studyDescriptionOverride ?? studyDescription;
     const seriesDateLabel = seriesDateOverride ?? `${formatDA(studyDate)} ${formatTM(studyTime)}`;
+
+    const seriesDescriptionLabel = seriesDescriptionOverride ?? seriesDescription;
 
     const normal = (
       <React.Fragment>
@@ -141,7 +145,7 @@ class ViewportOverlay extends PureComponent {
                 ? `Thick: ${formatNumberPrecision(sliceThickness, 2)} mm`
                 : ''}
             </div>
-            <div>{seriesDescription}</div>
+            <div>{seriesDescriptionLabel}</div>
           </div>
         </div>
       </React.Fragment>

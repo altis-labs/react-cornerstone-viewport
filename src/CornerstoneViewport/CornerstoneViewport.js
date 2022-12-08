@@ -77,7 +77,12 @@ class CornerstoneViewport extends Component {
     isOverlayVisible: PropTypes.bool,
     //custom
     imageIdIndexChange: PropTypes.func,
-    seriesDateLabel: PropTypes.string,
+    labelOverrides: PropTypes.shape({
+      seriesDate: PropTypes.string,
+      patientName: PropTypes.string,
+      patientId: PropTypes.string,
+      studyDescription: PropTypes.string,
+    })
   };
 
   static defaultProps = {
@@ -342,7 +347,7 @@ class CornerstoneViewport extends Component {
     const {
       viewportOverlayComponent: Component,
       imageIds,
-      seriesDateLabel,
+      labelOverrides,
     } = this.props;
     const {
       imageIdIndex,
@@ -363,7 +368,7 @@ class CornerstoneViewport extends Component {
           windowWidth={windowWidth}
           windowCenter={windowCenter}
           imageId={imageId}
-          seriesDateLabel={seriesDateLabel}
+          labelOverrides={labelOverrides}
         />
       )
     );

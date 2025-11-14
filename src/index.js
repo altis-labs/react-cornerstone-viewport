@@ -1,8 +1,5 @@
 import './metadataProvider.js';
 import CornerstoneViewport from './CornerstoneViewport/CornerstoneViewport.js';
 
-import ViewportOverlay from './ViewportOverlay/ViewportOverlay';
-
-export { ViewportOverlay };
-
+// Export only the primary component used by consumers
 export default CornerstoneViewport;

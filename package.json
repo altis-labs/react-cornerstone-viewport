@@ -21,7 +21,7 @@
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
-    "@altis-labs/cornerstone-tools": "1.x.x",
+    "@altis-labs/cornerstone-tools": "1.2.0",
     "cornerstone-core": "2.3.x",
     "cornerstone-math": "0.1.x",
     "cornerstone-wado-image-loader": "3.0.x",
